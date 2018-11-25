@@ -1,0 +1,38 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Admin</h4>
+                <p class="category">System management</p>
+            </div>
+            <div class="card-content">
+                <div class="nav-tabs-navigation">
+                    <div class="nav-tabs-wrapper">
+                        <ul class="nav nav-tabs" data-tabs="tabs" id="tabs">
+                            <li class="active ti-user"><a data-toggle="tab" href="#users">Users</a></li>
+                            <li class="ti-basketball"><a data-toggle="tab" href="#products">Products</a></li>
+                            <li class="ti-book"><a data-toggle="tab" href="#invoices">Invoices</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="tab-content" id="my-tab-content">
+                    <div class="tab-pane active" id="users">
+                        <user-management></user-management>
+                    </div>
+                    <div class="tab-pane" id="products">
+                        <product-management></product-management>
+                    </div>
+                    <div class="tab-pane" id="invoices">
+                        invoice management
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <order-finalisation></order-finalisation>
+    </div>
+</div>
+

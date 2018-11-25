@@ -1,0 +1,75 @@
+﻿<div class="container-fluid">
+    <div class="row">
+        <order-summary [shoppingCard]="shoppingCard"></order-summary>
+        <product-search (onSelectedCriteria)="GetSearchCriteria($event)"></product-search>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Orders</h4>
+                    <p class="category">Creat your order</p>
+                </div>
+                <div class="card-content">
+                    <div class="nav-tabs-navigation">
+                        <div class="nav-tabs-wrapper">
+                            <ul class="nav nav-tabs" data-tabs="tabs" id="tabs">
+                                <li class="ti-basketball"><a data-toggle="tab" href="#productList" aria-expanded="false">Product List</a></li>
+                                <li class="ti-shopping-cart-full"><a data-toggle="tab" href="#basketList" aria-expanded="true">Basket</a></li>
+                                <li class="ti-star"><a data-toggle="tab" href="#orderHistory">Orders History</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="tab-content" id="my-tab-content">
+                        <div class="tab-pane active text-center" id="productList">
+                            <div class="content table-responsive table-full-width">
+                                <product-list-tab [products]="productList" (onSelectedProducts)="GetSelectedProducts($event)"></product-list-tab>
+                                <pager [isEmpltyList]="isEmpltyList" (onSelectedPage)="GetProductsByPage($event)"></pager>
+                            </div>
+                        </div>
+                        <div class="tab-pane text-center" id="basketList">
+                            <order-basket-tab *ngIf="productsBasket" [productsBasket]="productsBasket" (onOrderSummary)="GetOrderSummary($event)"></order-basket-tab>
+                        </div>
+                        <div class="tab-pane" id="orderHistory">
+                            <order-history-tab [historyPageNumber]="historyPageNumber"></order-history-tab>
+                            <pager class="text-center" (onSelectedPage)="getOrdersByPage($event)"></pager>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+        <div class="col-md-12">
+            <ng-template #template class="card">
+                <div class="modal-header">
+                    <div class="row">
+                        <div class="col-md-6">
+                            Product Details
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <a class="btn btn-danger btn-simple btn-xs" (click)="closeModal()" title="" data-original-title="Remove">
+                                <i class="ti-close"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Count</label>
+                        <input type="number" class="form-control border-input" value="3">
+                    </div>
+                    <div class="form-group">
+                        <label>Details</label>
+                        <textarea class="form-control border-input" placeholder="Details about your product" rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-default btn-fill btn-wd" (click)="openModal(template)">Save Products</button>
+                    </div>
+                </div>
+            </ng-template>
+        </div>
+        
+    </div>
+</div>

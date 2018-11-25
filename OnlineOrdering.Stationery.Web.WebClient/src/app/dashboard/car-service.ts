@@ -1,0 +1,21 @@
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
+
+@Injectable()
+export class CarService {
+
+  constructor(private http: HttpClient) {
+  }
+
+  getAll(): Observable<any> {
+    return this.http.get('//localhost:8080/cool-cars');
+  }
+
+  getValues(): Observable<any>{
+    return this.http.get('//localhost:5369/api/values');
+  }
+  //this._httpService.get('http://localhost:5369/api/values').subscribe(values => {
+          //  this.apiValues = values.json() as string[];
+        //});
+}

@@ -1,0 +1,11 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-4 col-md-5">
+           <user-summary [userSummary]="userSummary"></user-summary>
+           <team-members [teamMembers]="teamMembers"></team-members>
+        </div>
+        <div class="col-lg-8 col-md-7">
+            <edit-profile [userProfile]="userProfile" (onProfileUpdated)="GetUpdatedProfile($event)"></edit-profile>
+        </div>
+    </div>
+</div>

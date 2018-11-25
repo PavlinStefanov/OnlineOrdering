@@ -1,0 +1,30 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        <div class="card card-wizard" id="wizardCard">
+            <form action="" id="wizardForm" method="" novalidate="novalidate" class="ng-untouched ng-pristine ng-valid">
+                <div class="card-header text-center">
+                    <h4 class="card-title">Order Management</h4>
+                    <p class="category">Send an order to a vendor</p>
+                </div>
+                <div class="card-content">
+                    <ul class="nav nav-pills">
+                        <li class="active" style="width: 49.9999%;"><a data-toggle="tab" href="#tab1" aria-expanded="true">Send Оrder</a></li>
+                        <li style="width: 49.9999%;" class=""><a data-toggle="tab" href="#tab2" aria-expanded="false">Orders out of the box</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tab1">
+                           <order-sending></order-sending>
+                        </div>
+                        <div class="tab-pane" id="tab2">
+                           <order-out-of-the-box></order-out-of-the-box>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="clearfix"></div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>

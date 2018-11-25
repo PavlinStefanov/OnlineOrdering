@@ -1,0 +1,315 @@
+﻿<div class="row">
+    <div class="col-md-6">
+        <!--<order-created [orderList]="_orderList" (onSelectedOrder)="GetSelectedOrder($event)"></order-created>-->
+        <div class="card">
+            <div class="header">
+                <h4 class="title">Created Orders</h4>
+                <div class="row">
+                    <div class="text-center">
+                        <a class="btn btn-info btn-simple btn-hover" title="" data-original-title="Left">
+                            <i class="ti-arrow-circle-left"></i>
+                        </a>
+                        <a class="btn btn-info btn-simple btn-hover" title="" data-original-title="Right">
+                            <i class="ti-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="content">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <td>OrderID</td>
+                            <td>Unit</td>
+                            <td>Employee</td>
+                            <td>Count</td>
+                            <td>Price</td>
+                            <td style="text-align:center">Details</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let order of orderList">
+                            <td>{{order.orderId}}</td>
+                            <td>{{order.unit}}</td>
+                            <td>{{order.employee}}</td>
+                            <td>{{order.productsCount}}</td>
+                            <td>${{order.totalPrice}}</td>
+                            <td class="td-actions text-center">
+                                <a class="btn btn-info btn-simple btn-xs" title="" (click)="getOrderDetails(order)" data-original-title="View Order">
+                                    <i class="ti-shopping-cart-full"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <!--<order-notification></order-notification>-->
+        <div class="card">
+            <div class="header">
+                <h5 class="notification"><i class="ti-bell"></i> 5 Notifications</h5>
+            </div>
+            <div class="content" style="height:260px;width:790px;overflow:auto;overflow-x: hidden;">
+                <div class="alert alert-info">
+                    <button type="button" aria-hidden="true" class="close">×</button>
+                    <span data-notify="icon" class="ti-shopping-cart-full"></span>
+                    <span data-notify="message">This is a plain notification</span>
+                </div>
+                <div class="alert alert-warning" data-notify="container">
+                    <button type="button" aria-hidden="true" class="close">×</button>
+                    <span data-notify="icon" class="ti-shopping-cart-full"></span>
+                    <span data-notify="message">This is a notification with close button.</span>
+                </div>
+                <div class="alert alert-success" data-notify="container">
+                    <button type="button" aria-hidden="true" class="close">×</button>
+                    <span data-notify="icon" class="ti-bell"></span>
+                    <span data-notify="message">This is a notification with close button and icon. So you don't have to worry about the style.</span>
+                </div>
+                <div class="alert alert-danger" data-notify="container">
+                    <button type="button" aria-hidden="true" class="close">×</button>
+                    <span data-notify="icon" class="ti-pie-chart"></span>
+                    <span data-notify="message">
+                        This is a notification with close button and icon and have many lines.
+                        You can see that the icon and the close button are always vertically aligned.
+                        This is a beautiful notification.
+                    </span>
+                </div>
+            </div>
+            <div class="footer">
+                <br />
+                <hr />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <!--<products-by-order *ngIf="selectedOrderToExport" [order]="selectedOrderToExport" (onProcessedOrder)="GetProcessedOrder($event)"></products-by-order>-->
+        <div class="card">
+            <!--<div *ngIf="!_order" class="text-center">
+                <h5>
+                    No order selected...
+                </h5>
+            </div>-->
+        </div>
+        <div class="card">
+            <div class="header" *ngIf="_order">
+                <h4 class="title">Products by Order: {{_order.orderId}}</h4>
+                <div class="row">
+                    <div class="text-center">
+                        <a class="btn btn-info btn-simple btn-hover" title="" data-original-title="Left">
+                            <i class="ti-arrow-circle-left"></i>
+                        </a>
+                        <a class="btn btn-info btn-simple btn-hover" title="" data-original-title="Right">
+                            <i class="ti-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="content">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <td>Product</td>
+                            <td>Unit price</td>
+                            <td>Total</td>
+                            <td>Count</td>
+                            <td>Status</td>
+                            <td>Comment</td>
+                            <td>Edit</td>
+                            <td>Action</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngIf="_order">
+                            <tr *ngFor="let product of _order.products">
+                                <td>{{product.productName}}</td>
+                                <td>${{product.unitPrice}}</td>
+                                <td>${{product.totalPrice}}</td>
+                                <td>
+                                    <input type="text" class="form-control border-input events" [id]="product.articuleId" disabled [(ngModel)]="product.productsCount">
+                                </td>
+                                <td>
+                                    <select class="form-control border-input" disabled (change)="SelectedOrderStatus($event.target.value)" [id]="product.productName+product.productId.toString()">
+                                        <option *ngFor="let status of orderStatus"
+                                                [value]="status.statusId"
+                                                [selected]="status.statusId == 1">
+                                            {{status.name}}
+                                        </option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <textarea class="form-control border-input text-left events" [(ngModel)]="product.comment" [id]="product.productId" disabled placeholder="Details about your product" rows="1">
+                                </textarea>
+                                </td>
+                                <td>
+                                    <ui-switch [checked]="false" color="orange" (change)="onChange(product.productId, product.articuleId, product.productName+product.productId.toString())"></ui-switch>
+                                </td>
+                                <td>
+                                    <a class="btn btn-{{saveStatus}} btn-simple btn-xs" title="" (click)="updateProduct(product)" data-original-title="Edit Product">
+                                        <i class="ti-save"></i>
+                                    </a>
+                                    <a class="btn btn-danger btn-simple btn-xs" title="" (click)="RemoveProduct(product)" data-original-title="Remove Product">
+                                        <i class="ti-close"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-4 col-md-5">
+        <!--<order-linking></order-linking>-->
+        <div class="card">
+            <div class="header">
+                <div class="dropdown" style="text-align:right">
+                    <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button" aria-expanded="false">
+                        <i class="ti-settings"></i> <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                        <li><a href="management">Refresh</a></li>
+                        <!--<li><a class="btn-defaul" (click)="displayOrderDetails()">Veiw details</a></li>-->
+                        <li><a lass="btn-defaul" (click)="openModal(template)">Link Orders</a></li>
+                        <li class="divider"></li>
+                        <li><a href="management">End Linked Order</a></li>
+                    </ul>
+                </div>
+
+                <h4 class="title">Linking</h4>
+                <p class="category">Link orders in one</p>
+            </div>
+            <div class="content">
+                <div class="row">
+                    <div class="col-xs-5">
+                        <div class="icon-big icon-warning text-center">
+                            <i class="ti-package"></i>
+                        </div>
+                    </div>
+                    <div class="col-xs-7">
+                        <div class="numbers">
+                            <p>Parend</p>643
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="text-center">
+                <div class="row">
+                    <!--<div class="col-md-3 col-md-offset-1">
+                        <h5>{{userProfile.createdOrders}}<br /><small>Orders</small></h5>
+                        <h5>{{userProfile.createdOrders}}<br /><small>Orders</small></h5>
+                    </div>-->
+                    <div class="col-md-4">
+                        <h5>3<br /><small>Orders</small></h5>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>56 <br /><small>Products</small></h5>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>$43.75<br /><small>Costs</small></h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-8 col-md-7">
+        <!--<order-ending></order-ending>-->
+        <div class="card">
+            <!--<div *ngIf="orderListToEnd?.length <= 0" class="text-center">
+                <h5>
+                    No order end...
+                </h5>
+            </div>-->
+        </div>
+        <div class="card">
+            <div class="header">
+                <h4 class="title">Ending Orders</h4>
+                <div class="row">
+                    <div class="text-center">
+                        <a class="btn btn-info btn-simple btn-hover" title="" data-original-title="Left">
+                            <i class="ti-arrow-circle-left"></i>
+                        </a>
+                        <a class="btn btn-info btn-simple btn-hover" title="" data-original-title="Right">
+                            <i class="ti-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="content">
+
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <td>OrderID</td>
+                            <td>Unit</td>
+                            <td>Products</td>
+                            <td>Total</td>
+                            <td>Is Linked</td>
+                            <td>End Orders</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngIf="orderListToEnd?.length > 0">
+                            <tr *ngFor="let order of orderListToEnd">
+                                <td>{{order.orderId}}</td>
+                                <td>{{order.unit}}</td>
+                                <td>{{order.productsCount}}</td>
+                                <td>${{order.totalPrice}}</td>
+                                <td>False</td>
+                                <td>
+                                    <button type="submit" class="btn btn-warning btn-fill btn-sm">End</button>
+                                </td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+                <!--<form>
+                    <div class="row">
+                        <div style="height:235px;width:1010px;overflow:auto;overflow-x: hidden;">
+                        </div>
+                    </div>
+                </form>-->
+            </div>
+        </div>
+    </div>
+</div>
+<ng-template #template class="card">
+    <div class="modal-header">
+        <div class="row">
+            <div class="col-md-6">
+                Link Details
+            </div>
+            <div class="col-md-6 text-right">
+                <a class="btn btn-danger btn-simple btn-xs" (click)="closeModal()" title="" data-original-title="Remove">
+                    <i class="ti-close"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            <label>Orders to Link</label>
+            <select class="form-control border-input" (change)="SelectedOrderToLink($event.target.value)">
+                <option>-- Select Order --</option>
+                <option [value]="order" *ngFor="let order of ordersToLinck">{{order}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Linked Orders:</label>
+            <div class="bootstrap-tagsinput" *ngFor="let ord of linkedOrderList">
+                <span class="tag label label-info" (click)="removeFromLinked(order)">{{ord}}<span data-role="remove"></span></span>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <div class="text-center">
+            <button type="submit" class="btn btn-default btn-fill btn-wd" (click)="saveLinkedOrder()">Save Changes</button>
+        </div>
+    </div>
+</ng-template>

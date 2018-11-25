@@ -1,0 +1,48 @@
+﻿
+
+    
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th class="text-center">View</th>
+                    <th class="text-center">ArticulID</th>
+                    <th class="text-center">Product Name</th>
+                    <th class="text-center">Unit Price</th>
+                    <th class="text-center">Measure</th>
+                    <th class="text-center">Count</th>
+                    <th class="text-center">Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let product of _products">
+                    <td><img src="assets/showcase/images/products/{{product.view}}" style="height:50px"></td>
+                    <td>{{product.articulId}}</td>
+                    <td>{{product.name}}</td>
+                    <td>${{product.unitPrice}}</td>
+                    <td>{{product.measure}}</td>
+                    <td class="td-number td-quantity">
+                        {{product.countOfProducts}}
+                        <div class="btn-group">
+                            <button class="btn btn-sm" (click)="RemoveProduct(product.productId)"><i class="ti-minus"></i></button>
+                            <button class="btn btn-sm" (click)="AddProduct(product.productId)"><i class="ti-plus"></i></button>
+                        </div>
+                    </td>
+                    <td>
+                        ${{product.totalPrice | number}}
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><b>Total</b></td>
+                    <td><b>${{totalAll | number}}</b></td>
+                </tr>
+            </tfoot>
+        </table>
+    
+    

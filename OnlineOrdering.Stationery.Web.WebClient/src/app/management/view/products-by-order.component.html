@@ -1,0 +1,73 @@
+﻿<div class="card">
+    <div class="header">
+        <h4 class="title" *ngIf="order">Products by Order: {{order.orderId}}</h4>
+        <div class="row">
+            <div class="text-center">
+                <a *ngIf="paginator.start === 0" class="btn btn-info btn-simple btn-hover disabled" title="" data-original-title="Left" (click)="paginator.GetPrev()">
+                    <i class="ti-arrow-circle-left"></i>
+                </a>
+                <a *ngIf="paginator.start !== 0" class="btn btn-info btn-simple btn-hover" title="" data-original-title="Left" (click)="paginator.GetPrev()">
+                    <i class="ti-arrow-circle-left"></i>
+                </a>
+                <a *ngIf="paginator.checkForUndifined()" class="btn btn-info btn-simple btn-hover disabled" title="" data-original-title="Right" (click)="paginator.GetNext()">
+                    <i class="ti-arrow-circle-right"></i>
+                </a>
+                <a *ngIf="!paginator.checkForUndifined()" class="btn btn-info btn-simple btn-hover" title="" data-original-title="Right" (click)="paginator.GetNext()">
+                    <i class="ti-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <td>Product</td>
+                    <td>Unit price</td>
+                    <td>Total</td>
+                    <td>Count</td>
+                    <td>Status</td>
+                    <td>Comment</td>
+                    <td>Edit</td>
+                    <td>Action</td>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container>
+                    <tr *ngFor="let product of paginator.getOrderListSequence()">
+                        <td *ngIf="product">{{product.productName}}</td>
+                        <td *ngIf="product">${{product.unitPrice}}</td>
+                        <td *ngIf="product">${{product.totalPrice}}</td>
+                        <td *ngIf="product">
+                            <input type="text" class="form-control border-input events" [id]="product.articuleId" disabled [(ngModel)]="product.productsCount">
+                        </td>
+                        <td *ngIf="product">
+                            <select class="form-control border-input" disabled (change)="SelectedOrderStatus($event.target.value)" [id]="product.productName+product.productId.toString()">
+                                <option *ngFor="let status of orderStatus"
+                                        [value]="status.statusId"
+                                        [selected]="status.statusId == product.statusId">
+                                    {{status.name}}
+                                </option>
+                            </select>
+                        </td>
+                        <td *ngIf="product">
+                            <textarea class="form-control border-input text-left events" [(ngModel)]="product.comment" [id]="product.productId" disabled placeholder="Details about your product" rows="1">
+                        </textarea>
+                        </td>
+                        <td *ngIf="product">
+                            <ui-switch [checked]="false" color="orange" (change)="onChange(product.productId, product.articuleId, product.productName+product.productId.toString())"></ui-switch>
+                        </td>
+                        <td *ngIf="product">
+                            <a class="btn btn-{{saveStatus}} btn-simple btn-xs" title="" (click)="updateProduct(product)" data-original-title="Edit Product">
+                                <i class="ti-save"></i>
+                            </a>
+                            <a class="btn btn-danger btn-simple btn-xs" title="" (click)="RemoveProduct(product)" data-original-title="Remove Product">
+                                <i class="ti-close"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+    </div>
+</div>

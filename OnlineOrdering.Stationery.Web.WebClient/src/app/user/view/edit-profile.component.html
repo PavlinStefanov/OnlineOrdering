@@ -1,0 +1,109 @@
+﻿<div class="card">
+    <div class="header">
+        <h4 class="title">Edit Profile</h4>
+    </div>
+    <div class="content">
+        <form>
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label>Company</label>
+                        <input type="text" class="form-control border-input" disabled placeholder="Company" value="{{userProfile.companyName}}">
+                    </div>
+                </div>
+                <div class="col-md-7">
+                    <div class="form-group">
+                        <label>Unit Address</label>
+                        <input type="text" class="form-control border-input" disabled placeholder="Unit Address" value="{{userProfile.unitAddress}}" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Region</label>
+                        <input type="text" class="form-control border-input" disabled placeholder="Region" value="{{userProfile.region}}">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Location</label>
+                        <input type="text" class="form-control border-input" disabled placeholder="Location" value="{{userProfile.location}}">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="tel" class="form-control border-input" disabled placeholder="Phone Number" value="{{userProfile.phoneNumber}}">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>First Name</label>
+                        <input type="text" [(ngModel)]="userProfile.firstName"
+                               class="form-control border-input" name="firstName"
+                               (input)="userProfile.firstName = $event.target.value"
+                               value="{{userProfile.firstName}}"/>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Last Name</label>
+                        <input type="text" [(ngModel)]="userProfile.lastName"
+                               class="form-control border-input" name="lastName"
+                               (input)="userProfile.lastName = $event.target.value"
+                               value="{{userProfile.lastName}}">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>User Name</label>
+                        <input type="text" [(ngModel)]="userProfile.userName"
+                               class="form-control border-input" name="userName"
+                               (input)="userProfile.userName = $event.target.value"
+                               value="{{userProfile.userName}}">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label>Job Position</label>
+                    <select class="form-control border-input" (change)="SelectedJobTitle($event.target.value)">
+                        <!--<option value="0">-- Select Job --</option>-->
+                        <option [selected]="job.jobId == 5" [value]="job.jobId" *ngFor="let job of valueObject.jobsList">{{job.jobName}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <label>Unit Name</label>
+                    <select class="form-control border-input" (change)="SelectedUnitName($event.target.value)">
+                        <!--<option value="0">-- Select Unit --</option>-->
+                        <option [selected]="unit.unitId == 9" [value]="unit.unitId" *ngFor="let unit of valueObject.unitList">{{unit.name}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Profile image</label>
+                        <input type="file" class="form-control border-input" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Background image</label>
+                        <input type="file" class="form-control border-input" />
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <button type="submit" (click)="updateUserProfile()" class="btn btn-info btn-fill btn-wd">Update Profile</button>
+            </div>
+        </form>
+    </div>
+</div>

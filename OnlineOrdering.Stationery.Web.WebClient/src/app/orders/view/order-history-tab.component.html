@@ -1,0 +1,213 @@
+﻿<div class="row">
+    <div class="col-md-3">
+        <div class="form-group">
+            <label>Select Status</label>
+            <select class="form-control border-input" (change)="selectedStatus($event.target.value)">
+                <option value="0">-- Status --</option>
+                <option *ngFor="let status of valueObject.statusList" [value]="status.statusId">{{status.name}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <label>Select Unit</label>
+            <select class="form-control border-input" (change)="selectedUnit($event.target.value)">
+                <option value="0">-- Unit --</option>
+                <option *ngFor="let unit of valueObject.unitList" [value]="unit.unitId">{{unit.name}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <label>Start Date</label>
+            <input type="text" [(ngModel)]="orderSC.startDate" (ngModelChange)="selectedStartDate(orderSC.startDate)"
+                   placeholder="select start date"
+                   class="form-control border-input"
+                   bsDatepicker [bsConfig]="bsConfig">
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <label>End Date</label>
+            <input type="text" [(ngModel)]="orderSC.endDate" (ngModelChange)="selectedEndDate(orderSC.endDate)"
+                   placeholder="select end date"
+                   class="form-control border-input"
+                   bsDatepicker [bsConfig]="bsConfig">
+        </div>
+    </div>
+</div>
+<div class="content table-responsive table-full-width text-center">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th style="text-align:center">
+                    <a class="btn btn-default btn-simple btn-icon" title="" data-original-title="Remove">
+                        <i class="ti-arrow-circle-up"></i>
+                        OrderID
+                    </a>
+                </th>
+                <th style="text-align:center">
+                    <a class="btn btn-default btn-simple btn-icon" title="" data-original-title="Remove">
+                        <i class="ti-arrow-circle-up"></i>
+                        Emplyee
+                    </a>
+                </th>
+                <th style="text-align:center">
+                    <a class="btn btn-default btn-simple btn-icon" title="" data-original-title="Remove">
+                        <i class="ti-arrow-circle-up"></i>
+                        Created Date
+                    </a>
+                </th>
+                <th style="text-align:center">
+                    <a class="btn btn-default btn-simple btn-icon" title="" data-original-title="Remove">
+                        <i class="ti-arrow-circle-up"></i>
+                        Total
+                    </a>
+                </th>
+                <th style="text-align:center">
+                    <a class="btn btn-default btn-simple btn-icon" title="" data-original-title="Remove">
+                        <i class="ti-arrow-circle-up"></i>
+                        Status
+                    </a>
+                </th>
+                <td style="text-align:center">Details</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let order of _ordersHistory">
+                <td>{{order.orderId}}</td>
+                <td>{{order.employee}}</td>
+                <td>{{order.createdDate}}</td>
+                <td>${{order.total}}</td>
+                <td class={{checkStatus(order.status)}}>{{order.status}}</td>
+                <td class="td-actions text-center">
+                    <a class="btn btn-info btn-simple btn-xs" title="" (click)="openOrderHistoryModal(orderHistoryModal, order.orderId)" data-original-title="View Profile">
+                        <!--(click)="displayOrderDetails()"-->
+                        <!--(click)="openModal1(template1)"-->
+                        <i class="ti-shopping-cart-full"></i>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<!--<div class="row text-center">
+    <div class="col-sm-2">
+    </div>
+    <div class="col-sm-7">
+        <div class="dataTables_paginate paging_full_numbers" id="datatables_paginate">
+            <ul class="pagination pagination-info">
+                <li class="paginate_button first disabled" id="datatables_first">
+                    <a href="#" aria-controls="datatables" data-dt-idx="0" tabindex="0">First</a>
+                </li>
+                <li class="paginate_button previous disabled" id="datatables_previous">
+                    <a href="#" aria-controls="datatables" data-dt-idx="1" tabindex="0">Previous</a>
+                </li>
+                <li class="paginate_button active">
+                    <a href="#" aria-controls="datatables" data-dt-idx="2" tabindex="0">1</a>
+                </li>
+                <li class="paginate_button ">
+                    <a href="#" aria-controls="datatables" data-dt-idx="3" tabindex="0">2</a>
+                </li>
+                <li class="paginate_button ">
+                    <a href="#" aria-controls="datatables" data-dt-idx="4" tabindex="0">3</a>
+                </li>
+                <li class="paginate_button ">
+                    <a href="#" aria-controls="datatables" data-dt-idx="5" tabindex="0">4</a>
+                </li>
+                <li class="paginate_button next" id="datatables_next">
+                    <a href="#" aria-controls="datatables" data-dt-idx="6" tabindex="0">Next</a>
+                </li>
+                <li class="paginate_button last" id="datatables_last">
+                    <a href="#" aria-controls="datatables" data-dt-idx="7" tabindex="0">Last</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+</div>-->
+
+
+<div class="modal-dialog modal-lg">
+    <ng-template #orderHistoryModal class="card">
+        <div class="modal-header">
+            <div class="row">
+                <div class="col-md-6">
+                    Order Details
+                </div>
+                <div class="col-md-6 text-right">
+                    <a class="btn btn-danger btn-simple btn-xs" (click)="closeOrderHistoryModal()" title="" data-original-title="Remove">
+                        <i class="ti-close"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="modal-body" *ngFor="let order of orderDetails">
+            <div style="height:285px;width:580px;overflow:auto;overflow-x: hidden;">
+                <div class="row" *ngFor="let product of order.products">
+                    <div class="col-sm-6">
+                        <label>Product</label>
+                        <input type="text" disabled class="form-control border-input" [value]="product.productName">
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label>Count</label>
+                            <input type="number"
+                                   [(ngModel)]="product.countOfProducts" 
+                                   [id]="product.productId"
+                                   [disabled]="switcher==false?'true':null" 
+                                   class="form-control border-input" 
+                                   [value]="product.countOfProducts">
+                        </div>
+                    </div>
+                    <br />
+                    <div class="col-sm-2">
+                        <ui-switch [checked]="switcher" color="#57382e" (change)="onChange(product.productId)"></ui-switch>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-4">
+                    <label>Status RM</label>
+                    <input type="text" disabled class="form-control border-input"> <!--[value]="product.rmComment"-->
+                </div>
+                <div class="col-sm-4">
+                    <label>Status OC</label>
+                    <input type="text" disabled class="form-control border-input"> <!--[value]="product.ocComment"-->
+                </div>
+                <div class="col-sm-4">
+                    <label>Current Status</label>
+                    <select class="form-control border-input" (change)="onOrderStatusChange($event.target.value)">
+                        <option *ngFor="let status of valueObject.statusList" 
+                                [value]="status.statusId"
+                                [selected]="status.statusId == 1">{{status.name}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <!--<div class="col-sm-12">
+                    <label>Comments</label>
+                    <textarea class="form-control border-input" rows="2" disabled placeholder="Details about your product">
+                          {{product.eComment}}
+                    </textarea>
+                    <textarea class="form-control border-input" rows="2" disabled placeholder="Details about your product">
+                          {{product.rmComment}}
+                    </textarea>
+                    <textarea class="form-control border-input" rows="2" disabled placeholder="Details about your product">
+                          {{product.ocComment}}
+                    </textarea>
+                </div>-->
+            </div>
+            <div class="row">
+                <hr/>
+            </div>
+            <div class="row">
+                <div class="text-center">
+                    <button type="submit" class="btn btn-default btn-fill btn-wd" (click)="confirmDelivery()">Confirm Delivery</button>
+                </div>
+            </div>
+            <br/>
+        </div>
+    </ng-template>
+</div>

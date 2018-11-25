@@ -1,0 +1,128 @@
+﻿<div class="card-product">
+    <div class="card-chat">
+        <h4 class="card-title">Your shoping basket</h4>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-shopping">
+            <thead>
+                <tr>
+                    <th class="text-center"></th>
+                    <th></th>
+                    <th class="text-right">Count</th>
+                    <th class="text-right">Price</th>
+                    <th class="text-right">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let product of _productsBasket">
+                    <td>
+                        <div class="img-container">
+                            <img src="assets/showcase/images/products/{{product.view}}">
+                        </div>
+                    </td>
+                    <td class="td-product">
+                        <strong>{{product.name}}</strong>
+                        <p>{{product.description}}</p>
+                    </td>
+                    <td class="td-price">
+                        {{product.countOfProducts}}
+                    </td>
+                    <td class="td-price">
+                        <small>€</small>{{product.totalPrice | number}}
+                    </td>
+
+                    <td class="td-actions text-right">
+                        <a class="btn btn-success btn-simple btn-xs" title="" (click)="openBasketsProductModal(basketsProduct, product)" data-original-title="Edit Profile">
+                            <i class="ti-pencil-alt"></i>
+                        </a>
+                        <a class="btn btn-danger btn-simple btn-xs" (click)="removeProduct(product.productId)" title="" data-original-title="Remove">
+                            <i class="ti-close"></i>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td class="td-total">
+                        Total
+                    </td>
+                    <td class="td-total">
+                        €{{totalAll | number}}
+                    </td>
+                    <td>
+                        <br />
+                        <button class="btn btn-info btn-default btn-icon" (click)="createOrder()" type="submit">Create Order</button>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <!--<div class="row">
+        <div class="col-sm-2">
+        </div>
+        <div class="col-sm-7">
+            <div class="dataTables_paginate paging_full_numbers" id="datatables_paginate">
+                <ul class="pagination">
+                    <li class="paginate_button first disabled" id="datatables_first">
+                        <a href="#" aria-controls="datatables" data-dt-idx="0" tabindex="0">First</a>
+                    </li>
+                    <li class="paginate_button previous disabled" id="datatables_previous">
+                        <a href="#" aria-controls="datatables" data-dt-idx="1" tabindex="0">Previous</a>
+                    </li>
+                    <li class="paginate_button active">
+                        <a href="#" aria-controls="datatables" data-dt-idx="2" tabindex="0">1</a>
+                    </li>
+                    <li class="paginate_button ">
+                        <a href="#" aria-controls="datatables" data-dt-idx="3" tabindex="0">2</a>
+                    </li>
+                    <li class="paginate_button ">
+                        <a href="#" aria-controls="datatables" data-dt-idx="4" tabindex="0">3</a>
+                    </li>
+                    <li class="paginate_button ">
+                        <a href="#" aria-controls="datatables" data-dt-idx="5" tabindex="0">4</a>
+                    </li>
+                    <li class="paginate_button next" id="datatables_next">
+                        <a href="#" aria-controls="datatables" data-dt-idx="6" tabindex="0">Next</a>
+                    </li>
+                    <li class="paginate_button last" id="datatables_last">
+                        <a href="#" aria-controls="datatables" data-dt-idx="7" tabindex="0">Last</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>-->
+</div>
+
+<div class="modal-dialog modal-lg">
+    <ng-template #basketsProduct class="card">
+        <div class="modal-header">
+            <div class="row">
+                <div class="col-md-6">
+                    Product Details
+                </div>
+                <div class="col-md-6 text-right">
+                    <a class="btn btn-danger btn-simple btn-xs" (click)="closeModal()" title="" data-original-title="Remove">
+                        <i class="ti-close"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label>Count</label>
+                <input type="number" class="form-control border-input" name="myName" [(ngModel)]="_product.countOfProducts">
+            </div>
+            <div class="form-group">
+                <label>Details</label>
+                <textarea class="form-control border-input" [(ngModel)]="comment" placeholder="Details about your product" rows="3"></textarea>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <div class="text-center">
+                <button type="submit" class="btn btn-default btn-fill btn-wd" (click)="saveProduct()">Save Products</button>
+            </div>
+        </div>
+    </ng-template>
+</div>

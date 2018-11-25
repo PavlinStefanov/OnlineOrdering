@@ -1,0 +1,45 @@
+﻿ <div class="col-lg-8 col-md-7">
+    <div class="card">
+        <div class="header">
+            <h4 class="title">Search Criteria</h4>
+        </div>
+        <div class="content">
+            <form>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Category</label>
+                            <select class="form-control border-input" (change)="selectedCategory($event.target.value)">
+                                <option value="0">-- Select Category --</option>
+                                <option *ngFor="let category of criteria.categoryList" [value]="category.id">{{category.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Sub category</label>
+                            <select class="form-control border-input" (change)="selectedSubCategory($event.target.value)">
+                                <option value="0">-- Select sub category --</option>
+                                <option *ngFor="let subCat of criteria.subCategoryList" [value]="subCat.id">{{subCat.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Vendor</label>
+                            <select class="form-control border-input" (change)="selectedVendor($event.target.value)">
+                                <option value="0">-- Select Vendor --</option>
+                                <option *ngFor="let vendor of criteria.vendorList" [value]="vendor.id">{{vendor.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-default btn-fill btn-wd" (click)="findProducts()">Find Products</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

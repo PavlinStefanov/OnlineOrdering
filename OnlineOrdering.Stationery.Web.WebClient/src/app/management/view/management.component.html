@@ -1,0 +1,22 @@
+﻿<div class="row">
+    <div class="col-md-6">
+        <order-created [orderList]="orderList" (onSelectedOrder)="GetSelectedOrder($event)"></order-created>
+    </div>
+    <div class="col-md-6">
+        <order-notification></order-notification>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <products-by-order *ngIf="_order" [order]="_order" (onProcessedOrder)="GetProcessedOrder($event)"></products-by-order>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-4 col-md-5">
+        <order-linking [orderListToEnd]="orderListToEnd"></order-linking>
+    </div>
+    <div class="col-lg-8 col-md-7">
+        <order-ending [orderListToEnd]="orderListToEnd" (onCompletedOrder)="GetCompletedOrder($event)"></order-ending>
+    </div>
+</div>
+

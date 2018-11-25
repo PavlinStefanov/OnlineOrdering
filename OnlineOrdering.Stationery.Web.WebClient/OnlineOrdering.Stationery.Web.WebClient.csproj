@@ -1,0 +1,114 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TypeScriptToolsVersion>2.8</TypeScriptToolsVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="src\app\admin\component\admin.component.ts" />
+    <None Remove="src\app\admin\component\order-finalisation.component.ts" />
+    <None Remove="src\app\admin\component\order-out-of-the-box.component.ts" />
+    <None Remove="src\app\admin\component\order-sending.component.ts" />
+    <None Remove="src\app\admin\component\product-management.component.ts" />
+    <None Remove="src\app\admin\component\user-management.component.ts" />
+    <None Remove="src\app\admin\model\employee-model.ts" />
+    <None Remove="src\app\admin\model\product-model.ts" />
+    <None Remove="src\app\admin\service\admin.service.ts" />
+    <None Remove="src\app\app.constants.ts" />
+    <None Remove="src\app\directives\alert.component.ts" />
+    <None Remove="src\app\management\component\management.component.ts" />
+    <None Remove="src\app\management\component\order-created.component.ts" />
+    <None Remove="src\app\management\component\order-ending.component.ts" />
+    <None Remove="src\app\management\component\order-linking.component.ts" />
+    <None Remove="src\app\management\component\products-by-order.component.ts" />
+    <None Remove="src\app\management\model\management-model.ts" />
+    <None Remove="src\app\management\service\management.service.ts" />
+    <None Remove="src\app\management\view\order-notification.component.ts" />
+    <None Remove="src\app\orders\component\order-basket-tab.component.ts" />
+    <None Remove="src\app\orders\component\order-history-tab.component.ts" />
+    <None Remove="src\app\orders\component\order-summary.component.ts" />
+    <None Remove="src\app\orders\component\pager.component.ts" />
+    <None Remove="src\app\orders\component\product-list-tab.component.ts" />
+    <None Remove="src\app\orders\component\product-search.component.ts" />
+    <None Remove="src\app\orders\model\date-format-pipe.ts" />
+    <None Remove="src\app\orders\model\order-model.ts" />
+    <None Remove="src\app\orders\orders.component.ts" />
+    <None Remove="src\app\orders\service\order-service.component.ts" />
+    <None Remove="src\app\shared\common\paginator.ts" />
+    <None Remove="src\app\shared\model\ResponseResult{T}.ts" />
+    <None Remove="src\app\shared\model\shared-model.ts" />
+    <None Remove="src\app\shared\service\observable-data.service.ts" />
+    <None Remove="src\app\shared\service\promise-data.service.ts" />
+    <None Remove="src\app\shared\service\shared-data.service.ts" />
+    <None Remove="src\app\test\component\test.comonent.ts" />
+    <None Remove="src\app\user\component\edit-profile.component.ts" />
+    <None Remove="src\app\user\component\team-members.component.ts" />
+    <None Remove="src\app\user\component\user-summary.component.ts" />
+    <None Remove="src\app\user\model\user.ts" />
+    <None Remove="src\app\user\service\data.service.ts" />
+    <None Remove="src\app\user\service\user.service.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="src\app\test\model\" />
+    <Folder Include="src\app\test\service\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.2.1" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.6" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.0.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.DotNet.Watcher.Tools" Version="2.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.3" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="src\app\admin\component\admin.component.ts" />
+    <TypeScriptCompile Include="src\app\admin\component\order-out-of-the-box.component.ts" />
+    <TypeScriptCompile Include="src\app\admin\component\order-finalisation.component.ts" />
+    <TypeScriptCompile Include="src\app\admin\component\order-sending.component.ts" />
+    <TypeScriptCompile Include="src\app\admin\component\product-management.component.ts" />
+    <TypeScriptCompile Include="src\app\admin\component\user-management.component.ts" />
+    <TypeScriptCompile Include="src\app\admin\model\employee-model.ts" />
+    <TypeScriptCompile Include="src\app\admin\model\product-model.ts" />
+    <TypeScriptCompile Include="src\app\admin\service\admin.service.ts" />
+    <TypeScriptCompile Include="src\app\app.constants.ts" />
+    <TypeScriptCompile Include="src\app\directives\alert.component.ts" />
+    <TypeScriptCompile Include="src\app\management\component\management.component.ts" />
+    <TypeScriptCompile Include="src\app\management\component\order-created.component.ts" />
+    <TypeScriptCompile Include="src\app\management\component\order-ending.component.ts" />
+    <TypeScriptCompile Include="src\app\management\component\order-linking.component.ts" />
+    <TypeScriptCompile Include="src\app\management\component\products-by-order.component.ts" />
+    <TypeScriptCompile Include="src\app\management\model\management-model.ts" />
+    <TypeScriptCompile Include="src\app\management\service\management.service.ts" />
+    <TypeScriptCompile Include="src\app\management\component\order-notification.component.ts" />
+    <TypeScriptCompile Include="src\app\orders\component\order-basket-tab.component.ts" />
+    <TypeScriptCompile Include="src\app\orders\component\order-history-tab.component.ts" />
+    <TypeScriptCompile Include="src\app\orders\component\order-summary.component.ts" />
+    <TypeScriptCompile Include="src\app\orders\component\pager.component.ts" />
+    <TypeScriptCompile Include="src\app\orders\component\product-list-tab.component.ts" />
+    <TypeScriptCompile Include="src\app\orders\component\product-search.component.ts" />
+    <TypeScriptCompile Include="src\app\orders\component\order.component.ts" />
+    <TypeScriptCompile Include="src\app\orders\model\date-format-pipe.ts" />
+    <TypeScriptCompile Include="src\app\orders\model\order-model.ts" />
+    <TypeScriptCompile Include="src\app\orders\service\order-service.component.ts" />
+    <TypeScriptCompile Include="src\app\shared\common\paginator.ts" />
+    <TypeScriptCompile Include="src\app\shared\model\ResponseResult{T}.ts" />
+    <TypeScriptCompile Include="src\app\shared\model\shared-model.ts" />
+    <TypeScriptCompile Include="src\app\shared\service\observable-data.service.ts" />
+    <TypeScriptCompile Include="src\app\shared\service\promise-data.service.ts" />
+    <TypeScriptCompile Include="src\app\shared\service\shared-data.service.ts" />
+    <TypeScriptCompile Include="src\app\test\component\test.comonent.ts" />
+    <TypeScriptCompile Include="src\app\user\component\edit-profile.component.ts" />
+    <TypeScriptCompile Include="src\app\user\component\team-members.component.ts" />
+    <TypeScriptCompile Include="src\app\user\component\user-summary.component.ts" />
+    <TypeScriptCompile Include="src\app\user\model\user.ts" />
+    <TypeScriptCompile Include="src\app\user\service\data.service.ts" />
+    <TypeScriptCompile Include="src\app\user\service\user.service.ts" />
+  </ItemGroup>
+</Project>

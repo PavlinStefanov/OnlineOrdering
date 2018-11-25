@@ -1,0 +1,26 @@
+﻿<div class="card" style="height:305px;width:510px;overflow:auto;">
+    <div class="header">
+        <h4 class="title">Team Members</h4>
+    </div>
+    <div class="content">
+        <ul class="list-unstyled team-members">
+             <li *ngFor="let member of _teamMembers">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <div class="avatar">
+                            <img src="assets/showcase/images/users/{{member.imgName}}" alt="Circle Image" class="img-circle img-no-padding img-responsive">
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        {{member.memberName}}
+                        <br />
+                        <span class="text-success"><small>{{member.memberUnit}}</small></span>
+                    </div>
+                    <div class="col-xs-3 text-right">
+                        <button class="btn btn-sm btn-success btn-icon"><i class="fa fa-envelope"></i></button>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

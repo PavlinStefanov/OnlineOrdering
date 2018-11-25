@@ -1,0 +1,33 @@
+﻿<div class="row">
+    <div class="col-sm-2">
+    </div>
+    <div class="col-sm-7">
+        <div class="dataTables_paginate paging_full_numbers" id="datatables_paginate">
+            <ul class="pagination">
+                <li id="datatables_first" (click)="getFirst()">
+                    <a *ngIf="isActive === 1"  class="btn first disabled" aria-controls="datatables" data-dt-idx="0" tabindex="0">First</a>
+                    <a *ngIf="isActive !== 1" class="btn first" aria-controls="datatables" data-dt-idx="0" tabindex="0">First</a>
+                </li>
+                <li id="datatables_previous" (click)="getPrevious()">
+                    <a *ngIf="isActive === 1" class="btn previous disabled" aria-controls="datatables" data-dt-idx="1" tabindex="1">Previous</a>
+                    <a *ngIf="isActive !== 1" class="btn previous" aria-controls="datatables" data-dt-idx="1" tabindex="1">Previous</a>
+                </li>
+                <li *ngFor="let page of getCurrentFour(); let i = index" [attr.data-index]="i" (click)="getPageNumber(page)">
+                    <a *ngIf="page === selectedIndex" class={{active}} aria-controls="datatables" data-dt-idx="4" tabindex="0">
+                        {{page}}
+                    </a>
+                    <a *ngIf="page !== selectedIndex" class={{notActive}} aria-controls="datatables" data-dt-idx="4" tabindex="0">
+                        {{page}}
+                    </a>
+                </li>
+                <li class="paginate_button next" id="datatables_next" (click)="getNext()">
+                    <a *ngIf="isEmpltyList" class="btn disabled" id="datatables_next" aria-controls="datatables" data-dt-idx="6" tabindex="0">Next</a>
+                    <a *ngIf="!isEmpltyList" class="btn" id="datatables_next" aria-controls="datatables" data-dt-idx="6" tabindex="0">Next</a>
+                </li>
+                <li class="paginate_button last" id="datatables_last">
+                    <a class="btn" aria-controls="datatables" data-dt-idx="7" tabindex="0">Last</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

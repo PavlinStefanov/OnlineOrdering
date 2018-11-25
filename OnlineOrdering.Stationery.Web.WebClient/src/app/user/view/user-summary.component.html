@@ -1,0 +1,28 @@
+﻿<div class="card card-user">
+    <div class="image">
+        <img src="assets/img/background.jpg" alt="..." />
+    </div>
+    <div class="content">
+        <div class="author">
+           <img class="avatar border-white" src="assets/showcase/images/users/ps17.png" />
+            <h4 class="title">
+                {{_userSummary.userName}}<br />
+                <a href="#"><small>{{_userSummary.email}}</small></a>
+            </h4>
+        </div>
+    </div>
+    <hr>
+    <div class="text-center">
+        <div class="row">
+            <div class="col-md-3 col-md-offset-1">
+                <h5>{{_userSummary.totalOrders}}<br /><small>Orders</small></h5>
+            </div>
+            <div class="col-md-4">
+                <h5>{{_userSummary.totalProducts}}<br /><small>Products</small></h5>
+            </div>
+            <div class="col-md-3">
+                <h5>${{_userSummary.totalCosts}}<br /><small>Costs</small></h5>
+            </div>
+        </div>
+    </div>
+</div>

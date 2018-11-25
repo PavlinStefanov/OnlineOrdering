@@ -1,0 +1,191 @@
+﻿<div class="row">
+    <div class="col-md-6">
+        <div class="panel panel-default panel-border">
+            <div class="panel-heading clearfix">
+                <label class="panel-title pull-left" style="padding-top: 7.5px;">Find Product</label>
+                <div class="input-group">
+                    <input #inputSearchProduct type="text" class="form-control shortInputSearch" placeholder="Filter, search products..">
+                    <div class="input-group-btn">
+                        <button class="btn btn-primary" (click)="getProduct(inputSearchProduct.value)"><i class="ti-search"></i></button>
+                        <button class="btn btn-primary" (click)="inputSearchProduct.value=''"><i class="ti-close"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="panel panel-border">
+                            <div class="panel-heading">
+                                <strong>{{product.description}}</strong>
+                            </div>
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="table table-condensed shortMargin">
+                                        <tr>
+                                            <td class="shortPadding">View:</td>
+                                            <td *ngIf="product.view"><img src="assets/showcase/images/products/{{product.view}}" style="height:70px; width:80px"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="shortPadding">Vendor:</td>
+                                            <td class="shortPadding"><i>{{product.vendor}}</i></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="shortPadding">Category:</td>
+                                            <td class="shortPadding"><i>{{product.category}}</i></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="shortPadding">Sub category:</td>
+                                            <td class="shortPadding"><i>{{product.subCategory}}</i></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="shortPadding">Measure:</td>
+                                            <td class="shortPadding"><i>{{product.measure}}</i></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="shortPadding">Unit price:</td>
+                                            <td class="shortPadding"><i>${{product.unitPrice}}</i></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="panel-footer clearfix">
+                                <label class="label label-warning">{{product.name}}</label>
+
+                                <div class="pull-right">
+                                    <div class="btn btn-primary btn-fill btn-xs" (click)="editProduct(product)">Edit <i></i></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="panel panel-default panel-border">
+            <div class="panel-heading">
+                <h4 class="title text-center">Product Management</h4>
+            </div>
+            <div class="panel-body">
+                <form>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Select Vendor</label>
+                                <select class="form-control valid border-input" name="cities" aria-required="true" aria-invalid="false">
+                                    <option>-- Select Vendor --</option>
+                                    <option *ngFor="let vendor of vendors">{{vendor.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Select Category</label>
+                                <select class="form-control valid border-input" (change)="SelectedCategory($event.target.value)" aria-required="true" aria-invalid="false">
+                                    <option>-- Select Category --</option>
+                                    <option *ngFor="let cat of categories"
+                                            [value]="cat.catId">
+                                    {{cat.catName}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Select Sub category</label>
+                                <select class="form-control valid border-input" aria-required="true" aria-invalid="false">
+                                    <option>-- Select Sub Category --</option>
+                                    <option *ngFor="let sub of subCategories">
+                                        {{sub.subName}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Product Description</label>
+                                <input [(ngModel)]="toPersist.description" 
+                                       type="text" 
+                                       name="product_description"
+                                       class="form-control border-input" 
+                                       placeholder="insert product description" aria-invalid="false" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Articule ID</label>
+                                <input [(ngModel)]="toPersist.articuleId" 
+                                       class="form-control valid border-input" 
+                                       name="product_articule" 
+                                       placeholder="insert articul id" 
+                                       type="text" aria-invalid="false">
+                                <label id="first_name-error" class="error" for="first_name" style="display: none;">
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Product Name</label>
+                                <input [(ngModel)]="toPersist.name"
+                                       class="form-control valid border-input"
+                                       name="product_name"
+                                       placeholder="insert product name"
+                                       type="text" aria-invalid="false">
+                                <label id="product_name-error" class="error" for="product_name" style="display: none;">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Unit Price</label>
+                                <input [(ngModel)]="toPersist.unitPrice"
+                                       class="form-control valid border-input"
+                                       name="product_unitPrice"
+                                       placeholder="insert price here"
+                                       type="text" aria-invalid="false">
+                                <label id="product_unitPrice-error" class="error" for="product_unitPrice" style="display: none;">
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Measure</label>
+                                <input [(ngModel)]="toPersist.measure"
+                                       class="form-control border-input"
+                                       name="product_measure"
+                                       placeholder="insert measure product"
+                                       type="text" aria-invalid="false">
+                                <label id="product_measure-error" class="error" for="product_measure" style="display: none;">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Product image</label>
+                                <input type="file" class="form-control border-input" />
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-default btn-fill btn-wd">Save Products</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

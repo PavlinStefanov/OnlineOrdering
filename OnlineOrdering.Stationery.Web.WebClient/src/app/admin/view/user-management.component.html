@@ -1,0 +1,196 @@
+﻿<div class="row">
+    <div class="col-md-6">
+        <div class="panel panel-default panel-border">
+            <div class="panel-heading clearfix">
+                <label class="panel-title pull-left" style="padding-top: 7.5px;">Find Employee</label>
+                <div class="input-group">
+                    <input #inputSearchEmployee type="text" class="form-control shortInputSearch" placeholder="Filter, search employees..">
+                    <div class="input-group-btn">
+                        <button class="btn btn-primary" (click)="getEmployee(inputSearchEmployee.value)"><i class="ti-search"></i></button>
+                        <button class="btn btn-primary" (click)="inputSearchEmployee.value=''"><i class="ti-close"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="panel panel-border" *ngIf="employee">
+                            <div class="panel-heading">
+                                <strong>{{employee.email}}</strong>
+                            </div>
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="table table-condensed shortMargin">
+                                        <tr>
+                                            <td class="shortPadding">Region:</td>
+                                            <td class="shortPadding">{{employee.region}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="shortPadding">Location:</td>
+                                            <td class="shortPadding"><i>{{employee.location}}</i></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="shortPadding">Phone Number:</td>
+                                            <td class="shortPadding"><i>{{employee.phoneNumber}}</i></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="shortPadding">Unit Name:</td>
+                                            <td class="shortPadding"><i>{{employee.unitName}}</i></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="shortPadding">Unit Address:</td>
+                                            <td class="shortPadding"><i>{{employee.address}}</i></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="shortPadding">User Name:</td>
+                                            <td class="shortPadding"><i>{{employee.userName}}</i></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="panel-footer clearfix">
+                                <label style="margin-left:40px" class="label label-warning">{{employee.jobTitle}}</label>
+                                <div class="pull-right">
+                                    <div class="btn btn-primary btn-fill btn-xs"  (click)="editEmployee(employee)">Edit <i></i></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="panel panel-default panel-border">
+            <div class="panel-heading">
+                <h4 class="title text-center">User Management</h4>
+            </div>
+            <div class="panel-body">
+                <form>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Select Region</label>
+                                <select class="form-control valid border-input" (change)="SelectedRegion($event.target.value)" aria-required="true" aria-invalid="false">
+                                    <option>-- Select Region --</option>
+                                    <option *ngFor="let region of regions"
+                                            [value]="region"
+                                            [selected]="region == toPersist.region">
+                                    {{region}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Select Location</label>
+                                <select class="form-control valid border-input" (change)="SelectedLocation($event.target.value)" aria-required="true" aria-invalid="false">
+                                    <option>-- Select Location --</option>
+                                    <option *ngFor="let location of locations" 
+                                            [value]="location"
+                                            [selected]="location == toPersist.location">
+                                    {{location}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Phone Number</label>
+                                <input [(ngModel)]="toPersist.phoneNumber"
+                                       class="form-control valid border-input"
+                                       name="phone_number"
+                                       placeholder="+359882921842"
+                                       type="text"
+                                       disabled="disabled"
+                                       aria-invalid="false">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Unit Name</label>
+                                <select class="form-control valid border-input" (change)="SelectedUnit($event.target.value)" aria-required="true" aria-invalid="false">
+                                    <option>-- Select Unit --</option>
+                                    <option *ngFor="let unit of units"
+                                            [value]="unit.unitId"
+                                            [selected]="unit.name == empUnit">
+                                        {{unit.name}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Unit Address</label>
+                                <input [(ngModel)]="toPersist.address"
+                                       class="form-control valid border-input"
+                                       name="unit_address"
+                                       placeholder="unit address"
+                                       type="text"
+                                       aria-invalid="false" disabled="disabled">
+                                <label id="first_name-error" class="error" for="unit_address" style="display: none;">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">First Name</label>
+                                <input [(ngModel)]="toPersist.firstName"
+                                       class="form-control valid border-input"
+                                       name="first_name"
+                                       placeholder="insert first name"
+                                       type="text"
+                                       aria-invalid="false">
+                                <label id="first_name-error" class="error" for="first_name" style="display: none;">
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Last Name</label>
+                                <input [(ngModel)]="toPersist.lastName"
+                                       class="form-control border-input"
+                                       name="last_name"
+                                       placeholder="insert last name"
+                                       type="text"
+                                       aria-invalid="false">
+                                <label id="first_name-error" class="error" for="last_name" style="display: none;">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Job Title</label>
+                                <select class="form-control valid border-input" (change)="SelectedJob($event.target.value)" name="cities" aria-required="true" aria-invalid="false">
+                                    <option>-- Select Job Title --</option>
+                                    <option *ngFor="let job of valueObject.jobsList"
+                                            [value]="job.jobId"
+                                            [selected]="job.jobId == toPersist.jobId">
+                                        {{job.jobName}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="text-center">
+                            <button type="submit" (click)="saveEmployee()" class="btn btn-default btn-fill btn-wd">Save Employee</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,56 @@
+﻿<div class="card">
+    <div class="header">
+        <h4 class="title">Ending Orders</h4>
+        <div class="row">
+            <div class="text-center">
+                <a *ngIf="paginator.start === 0" class="btn btn-info btn-simple btn-hover disabled" title="" data-original-title="Left" (click)="paginator.GetPrev()">
+                    <i class="ti-arrow-circle-left"></i>
+                </a>
+                <a *ngIf="paginator.start !== 0" class="btn btn-info btn-simple btn-hover" title="" data-original-title="Left" (click)="paginator.GetPrev()">
+                    <i class="ti-arrow-circle-left"></i>
+                </a>
+                <a *ngIf="paginator.checkForUndifined()" class="btn btn-info btn-simple btn-hover disabled" title="" data-original-title="Right" (click)="paginator.GetNext()">
+                    <i class="ti-arrow-circle-right"></i>
+                </a>
+                <a *ngIf="!paginator.checkForUndifined()" class="btn btn-info btn-simple btn-hover" title="" data-original-title="Right" (click)="paginator.GetNext()">
+                    <i class="ti-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <td>OrderID</td>
+                    <td>Unit</td>
+                    <td>Products</td>
+                    <td>Total</td>
+                    <td>Is Linked</td>
+                    <td>Complete</td>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngIf="paginator.getOrderListSequence()?.length > 0">
+                    <tr *ngFor="let order of paginator.getOrderListSequence()">
+                        <td *ngIf="order">{{order.orderId}}</td>
+                        <td *ngIf="order">{{order.unit}}</td>
+                        <td *ngIf="order">{{order.productsCount}}</td>
+                        <td *ngIf="order">${{order.totalPrice}}</td>
+                        <td *ngIf="order">{{order.isLinked}}</td>
+                        <!--<td *ngIf="!order.isLinked">False</td>-->
+                        <td *ngIf="order">
+                            <button type="submit" [disabled]="order.isLinked" (click)="completeOrder(order)" class="btn btn-warning btn-fill btn-sm">Complete</button>
+                        </td>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+        <!--<form>
+            <div class="row">
+                <div style="height:235px;width:1010px;overflow:auto;overflow-x: hidden;">
+                </div>
+            </div>
+        </form>-->
+    </div>
+</div>

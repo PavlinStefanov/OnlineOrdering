@@ -1,0 +1,93 @@
+﻿<div class="card">
+    <div class="header">
+        <div class="dropdown" style="text-align:right">
+            <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button" aria-expanded="false">
+                <i class="ti-settings"></i> <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                <li><a href="management">Refresh</a></li>
+                <!--<li><a class="btn-defaul" (click)="displayOrderDetails()">Veiw details</a></li>-->
+                <li><a lass="btn-defaul" (click)="openModal(template)">Link Orders</a></li>
+                <li class="divider"></li>
+                <li><a href="management">End Linked Order</a></li>
+            </ul>
+        </div>
+
+        <h4 class="title">Linking</h4>
+        <p class="category">Link orders in one</p>
+    </div>
+    <div class="content">
+        <div class="row">
+            <div class="col-xs-5">
+                <div class="icon-big icon-warning text-center">
+                    <i class="ti-package"></i>
+                </div>
+            </div>
+            <div class="col-xs-7">
+                <div class="numbers">
+                    <p>Parend</p>643
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="text-center">
+        <div class="row">
+            <div class="col-md-4">
+                <h5>{{totalOrders}}<br /><small>Orders</small></h5>
+            </div>
+            <div class="col-md-4">
+                <h5>{{totalProducts}} <br /><small>Products</small></h5>
+            </div>
+            <div class="col-md-4">
+                <h5>${{totalPrice | number}}<br /><small>Costs</small></h5>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<ng-template #template class="card">
+    <div class="modal-header">
+        <div class="row">
+            <div class="col-md-6">
+                Link Details
+            </div>
+            <div class="col-md-6 text-right">
+                <a class="btn btn-danger btn-simple btn-xs" (click)="closeModal()" title="" data-original-title="Remove">
+                    <i class="ti-close"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            <label>Region to Link</label>
+            <select class="form-control border-input" [disabled]="isDisabledReg" (change)="SelectedRegionToLink($event.target.value)">
+                <option>-- Select Region --</option>
+                <option [value]="reg.region"
+                        *ngFor="let reg of regions"
+                        [selected]="reg.region == region">
+                {{reg.region}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Orders to Link</label>
+            <select class="form-control border-input" (change)="SelectedOrderToLink($event.target.value)">
+                <option>-- Select Order --</option>
+                <option [value]="order.orderId" *ngFor="let order of ordersToLink">{{order.orderId}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Linked Orders ({{region}}):</label>
+            <div class="bootstrap-tagsinput" *ngFor="let order of linkedOrders">
+                <span class="tag label label-info" (click)="removeFromLinkedOrders(order)">{{order.orderId}}<span data-role="remove"></span></span>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <div class="text-center">
+            <button type="submit" class="btn btn-default btn-fill btn-wd" (click)="saveLinkedOrders()">Save Changes</button>
+        </div>
+    </div>
+</ng-template>

@@ -1,0 +1,51 @@
+﻿<div class="card">
+    <div class="header">
+        <h4 class="title">Created Orders</h4>
+        <div class="row">
+            <div class="text-center">
+                <a *ngIf="paginator.start === 0" class="btn btn-info btn-simple btn-hover disabled" title="" data-original-title="Left" (click)="paginator.GetPrev()">
+                    <i class="ti-arrow-circle-left"></i>
+                </a>
+                <a *ngIf="paginator.start !== 0" class="btn btn-info btn-simple btn-hover" title="" data-original-title="Left" (click)="paginator.GetPrev()">
+                    <i class="ti-arrow-circle-left"></i>
+                </a>
+                <a *ngIf="paginator.checkForUndifined()" class="btn btn-info btn-simple btn-hover disabled" title="" data-original-title="Right" (click)="paginator.GetNext()">
+                    <i class="ti-arrow-circle-right"></i>
+                </a>
+                <a *ngIf="!paginator.checkForUndifined()" class="btn btn-info btn-simple btn-hover" title="" data-original-title="Right" (click)="paginator.GetNext()">
+                    <i class="ti-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div >
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <td>OrderID</td>
+                        <td>Unit</td>
+                        <td>Employee</td>
+                        <td>Count</td>
+                        <td>Price</td>
+                        <td style="text-align:center">Details</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let order of paginator.getOrderListSequence()">
+                        <td *ngIf="order">{{order.orderId}}</td>
+                        <td *ngIf="order">{{order.unit}}</td>
+                        <td *ngIf="order">{{order.employee}}</td>
+                        <td *ngIf="order">{{order.productsCount}}</td>
+                        <td *ngIf="order">${{order.totalPrice}}</td>
+                        <td *ngIf="order" class="td-actions text-center">
+                            <a class="btn btn-info btn-simple btn-xs" title="" (click)="GetOrderDetails(order)" data-original-title="View Order">
+                                <i class="ti-shopping-cart-full"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
